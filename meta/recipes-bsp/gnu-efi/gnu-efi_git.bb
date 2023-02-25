@@ -12,13 +12,13 @@ LIC_FILES_CHKSUM = "file://gnuefi/crt0-efi-arm.S;beginline=4;endline=16;md5=e582
                     file://lib/aarch64/initplat.c;beginline=2;endline=15;md5=8ed772501da77b2b3345aa6df8744c9e \
                    "
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/files/${BP}.tar.bz2 \
+SRC_URI = "git://git.code.sf.net/p/gnu-efi/code;protocol=https;branch=master \
            file://parallel-make-archives.patch \
            file://lib-Makefile-fix-parallel-issue.patch \
            file://gnu-efi-3.0.9-fix-clang-build.patch \
            "
-
-SRC_URI[sha256sum] = "b73b643a0d5697d1f396d7431448e886dd805668789578e3e1a28277c9528435"
+SRCREV = "d78b78cb2eb346b8094bb310520eee87d7547a72"
+S = "${WORKDIR}/git"
 
 COMPATIBLE_HOST = "(x86_64.*|i.86.*|aarch64.*|arm.*)-linux"
 COMPATIBLE_HOST:armv4 = 'null'
