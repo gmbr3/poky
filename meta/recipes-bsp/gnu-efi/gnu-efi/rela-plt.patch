@@ -1,8 +1,9 @@
-From 280015264847d379976448c3c222425cb405ca6c Mon Sep 17 00:00:00 2001
+From 247a95dac194a0740d5e1dc7011240f1ec7a6937 Mon Sep 17 00:00:00 2001
 From: Callum Farmer <gmbr3@opensuse.org>
 Date: Tue, 7 Mar 2023 21:25:35 +0000
-Subject: [PATCH] fix rela.plt
+Subject: [PATCH] Un-merge .rel.plt section
 
+Merging this section causes an incorrect RELASZ value
 ---
  gnuefi/elf_aarch64_efi.lds  | 2 +-
  gnuefi/elf_arm_efi.lds      | 2 +-
@@ -10,8 +11,8 @@ Subject: [PATCH] fix rela.plt
  gnuefi/elf_ia64_efi.lds     | 2 +-
  gnuefi/elf_mips64el_efi.lds | 2 +-
  gnuefi/elf_riscv64_efi.lds  | 2 +-
- gnuefi/elf_x86_64_efi.lds   | 2 +-
- 7 files changed, 7 insertions(+), 7 deletions(-)
+ gnuefi/elf_x86_64_efi.lds   | 3 ++-
+ 7 files changed, 8 insertions(+), 7 deletions(-)
 
 diff --git a/gnuefi/elf_aarch64_efi.lds b/gnuefi/elf_aarch64_efi.lds
 index 475a736..44d8ed2 100644
@@ -116,10 +117,10 @@ index e6eec43..ea63954 100644
  	_edata = .;
  	_data_size = . - _data;
 diff --git a/gnuefi/elf_x86_64_efi.lds b/gnuefi/elf_x86_64_efi.lds
-index 45acff3..cc2fabc 100644
+index 45acff3..2f0ecaa 100644
 --- a/gnuefi/elf_x86_64_efi.lds
 +++ b/gnuefi/elf_x86_64_efi.lds
-@@ -58,10 +58,10 @@ SECTIONS
+@@ -58,11 +58,12 @@ SECTIONS
      *(.rela.text*)
      *(.rela.data*)
      *(.rela.got)
@@ -127,10 +128,12 @@ index 45acff3..cc2fabc 100644
      *(.rela.dyn)
      *(.rela.stab)
    }
-+  .relaplt : { *(.rela.plt) }
    . = ALIGN(4096);
++  .rela.plt : { *(.rela.plt) }
++  . = ALIGN(4096);
    .dynsym   : { *(.dynsym) }
    . = ALIGN(4096);
+   .dynstr   : { *(.dynstr) }
 -- 
 2.31.1
 
