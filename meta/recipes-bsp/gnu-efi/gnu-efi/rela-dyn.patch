@@ -1,0 +1,106 @@
+From 02f96e8a2667b3456958b6d69eeb5d68d18cf3e2 Mon Sep 17 00:00:00 2001
+From: Callum Farmer <gmbr3@opensuse.org>
+Date: Sat, 4 Mar 2023 17:57:39 +0000
+Subject: [PATCH] *.efi.lds: Add .rel.dyn section
+
+LLVM LLD always calls it .rel[a].dyn no matter what
+so add this to the .rel[a] section
+
+Signed-off-by: Callum Farmer <gmbr3@opensuse.org>
+---
+ gnuefi/elf_aarch64_efi.lds  | 1 +
+ gnuefi/elf_arm_efi.lds      | 1 +
+ gnuefi/elf_ia32_efi.lds     | 1 +
+ gnuefi/elf_ia64_efi.lds     | 1 +
+ gnuefi/elf_mips64el_efi.lds | 1 +
+ gnuefi/elf_riscv64_efi.lds  | 1 +
+ gnuefi/elf_x86_64_efi.lds   | 1 +
+ 7 files changed, 7 insertions(+)
+
+diff --git a/gnuefi/elf_aarch64_efi.lds b/gnuefi/elf_aarch64_efi.lds
+index 3508ada..bbaa0d2 100644
+--- a/gnuefi/elf_aarch64_efi.lds
++++ b/gnuefi/elf_aarch64_efi.lds
+@@ -60,6 +60,7 @@ SECTIONS
+     *(.rela.data*)
+     *(.rela.got)
+     *(.rela.plt)
++    *(.rela.dyn)
+     *(.rela.stab)
+   }
+   . = ALIGN(512);
+diff --git a/gnuefi/elf_arm_efi.lds b/gnuefi/elf_arm_efi.lds
+index dc2f459..35ddf0a 100644
+--- a/gnuefi/elf_arm_efi.lds
++++ b/gnuefi/elf_arm_efi.lds
+@@ -47,6 +47,7 @@ SECTIONS
+     *(.rel.data*)
+     *(.rel.got)
+     *(.rel.plt)
++    *(.rel.dyn)
+     *(.rel.stab)
+   }
+   _edata = .;
+diff --git a/gnuefi/elf_ia32_efi.lds b/gnuefi/elf_ia32_efi.lds
+index ef99087..d800b6c 100644
+--- a/gnuefi/elf_ia32_efi.lds
++++ b/gnuefi/elf_ia32_efi.lds
+@@ -62,6 +62,7 @@ SECTIONS
+     *(.rel.data*)
+     *(.rel.got)
+     *(.rel.plt)
++    *(.rel.dyn)
+     *(.rel.stab)
+     *(.data.rel.ro.local)
+     *(.data.rel.local)
+diff --git a/gnuefi/elf_ia64_efi.lds b/gnuefi/elf_ia64_efi.lds
+index 05b0f36..6ab462a 100644
+--- a/gnuefi/elf_ia64_efi.lds
++++ b/gnuefi/elf_ia64_efi.lds
+@@ -59,6 +59,7 @@ SECTIONS
+     *(.rela.data*)
+     *(.rela.got)
+     *(.rela.plt)
++    *(.rela.dyn)
+     *(.rela.gnu.linkonce.d*)
+     *(.rela.stab)
+     *(.rela.ctors)
+diff --git a/gnuefi/elf_mips64el_efi.lds b/gnuefi/elf_mips64el_efi.lds
+index e53a16d..4272830 100644
+--- a/gnuefi/elf_mips64el_efi.lds
++++ b/gnuefi/elf_mips64el_efi.lds
+@@ -47,6 +47,7 @@ SECTIONS
+     *(.rel.data*)
+     *(.rel.got)
+     *(.rel.plt)
++    *(.rel.dyn)
+     *(.rel.stab)
+   }
+   _edata = .;
+diff --git a/gnuefi/elf_riscv64_efi.lds b/gnuefi/elf_riscv64_efi.lds
+index 453ef79..e6eec43 100644
+--- a/gnuefi/elf_riscv64_efi.lds
++++ b/gnuefi/elf_riscv64_efi.lds
+@@ -50,6 +50,7 @@ SECTIONS {
+     *(.rela.data*)
+     *(.rela.got)
+     *(.rela.plt)
++    *(.rela.dyn)
+     *(.rela.stab)
+   }
+ 	. = ALIGN(512);
+diff --git a/gnuefi/elf_x86_64_efi.lds b/gnuefi/elf_x86_64_efi.lds
+index 3a8e140..dbb028d 100644
+--- a/gnuefi/elf_x86_64_efi.lds
++++ b/gnuefi/elf_x86_64_efi.lds
+@@ -59,6 +59,7 @@ SECTIONS
+     *(.rela.data*)
+     *(.rela.got)
+     *(.rela.plt)
++    *(.rela.dyn)
+     *(.rela.stab)
+   }
+   . = ALIGN(4096);
+-- 
+2.31.1
+
