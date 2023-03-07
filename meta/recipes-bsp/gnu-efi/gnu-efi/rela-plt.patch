@@ -127,7 +127,7 @@ index 45acff3..cc2fabc 100644
      *(.rela.dyn)
      *(.rela.stab)
    }
-+  .rela.plt : { *(.rela.plt) }
++  .relaplt : { *(.rela.plt) }
    . = ALIGN(4096);
    .dynsym   : { *(.dynsym) }
    . = ALIGN(4096);
