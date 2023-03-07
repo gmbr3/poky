@@ -15,9 +15,9 @@ index 7be5902..fad1939 100644
 --- a/gnuefi/elf_x86_64_efi.lds
 +++ b/gnuefi/elf_x86_64_efi.lds
 @@ -61,6 +61,16 @@ SECTIONS
-     *(.rela.plt)
      *(.rela.stab)
    }
+   .rela.plt : { *(.rela.plt) }
 +  . = ALIGN(4096);
 +  .sbat :
 +  {
