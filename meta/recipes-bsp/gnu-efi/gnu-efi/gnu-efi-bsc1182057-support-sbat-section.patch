@@ -17,7 +17,7 @@ index 7be5902..fad1939 100644
 @@ -61,6 +61,16 @@ SECTIONS
      *(.rela.stab)
    }
-   .rela.plt : { *(.rela.plt) }
+   .relaplt : { *(.rela.plt) }
 +  . = ALIGN(4096);
 +  .sbat :
 +  {
