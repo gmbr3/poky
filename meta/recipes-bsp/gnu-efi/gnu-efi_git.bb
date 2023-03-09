@@ -16,12 +16,9 @@ SRC_URI = "git://git.code.sf.net/p/gnu-efi/code;protocol=https;branch=master \
            file://parallel-make-archives.patch \
            file://lib-Makefile-fix-parallel-issue.patch \
            file://gnu-efi-3.0.9-fix-clang-build.patch \
-           file://disable-apps.patch \
-	   file://rela-dyn.patch \
-	   file://rela-plt.patch \
            file://gnu-efi-bsc1182057-support-sbat-section.patch \
            "
-SRCREV = "d78b78cb2eb346b8094bb310520eee87d7547a72"
+SRCREV = "0f9c15fe4fd4b37691fdb505794b0d73df21d4d5"
 S = "${WORKDIR}/git"
 
 COMPATIBLE_HOST = "(x86_64.*|i.86.*|aarch64.*|arm.*)-linux"
